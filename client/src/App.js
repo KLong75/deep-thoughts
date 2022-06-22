@@ -31,24 +31,28 @@ function App() {
           <div className='container'>
             <Routes>
               <Route
-                path="/"
+                path='/'
                 element={<Home />}
               />
               <Route
-                path="/"
+                path='/login'
                 element={<Login />}
               />
               <Route
-                path="/"
+                path='/signup'
                 element={<Signup />}
               />
+              <Route path='/profile'>
+                <Route path=':username' element={<Profile />} />
+                <Route path='' element={<Profile />} />
+              </Route>
               <Route
-                path="/"
-                element={<Profile />}
+                path='/thought/:id'
+                element={<SingleThought />}
               />
               <Route
-                path="/"
-                element={<SingleThought />}
+                path='*'
+                element={<NoMatch />}
               />
             </Routes>
           </div>
