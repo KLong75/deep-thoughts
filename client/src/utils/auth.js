@@ -1,7 +1,7 @@
 import decode from 'jwt-decode';
 
 class AuthService {
-  // retrieve date saved in token
+  // retrieve data saved in token
   getProfile() {
     return decode(this.getToken());
   }
@@ -20,7 +20,7 @@ class AuthService {
       const decoded = decode(token);
       if (decoded.exp < Date.now() / 1000) {
         return true;
-      } else {
+      } else { 
         return false;
       }
     } catch (err) {
