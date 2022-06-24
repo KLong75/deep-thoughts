@@ -1,7 +1,9 @@
 import React from 'react';
+import Auth from '../utils/auth'
 import { useParams } from 'react-router-dom';
-
+import { Link } from 'react-router-dom';
 import ReactionList from '../components/ReactionList';
+import ReactionForm from '../components/ReactionForm';
 
 import { useQuery } from '@apollo/client';
 import { QUERY_THOUGHT } from '../utils/queries';
@@ -24,7 +26,13 @@ if (loading) {
       <div className="card mb-3">
         <p className="card-header">
           <span style={{ fontWeight: 700 }} className="text-light">
-            {thought.username}
+            <Link 
+              to={`/profile/${thought.username}`}
+              style={{ fontWeight: 700 }}
+              className='text-light'
+            >
+             {thought.username}
+            </Link>{' '}
           </span>{' '}
           thought on {thought.createdAt}
         </p>
@@ -36,6 +44,7 @@ if (loading) {
       {thought.reactionCount > 0 && (
         <ReactionList reactions={thought.reactions} />
       )}
+      {Auth.loggedIn() && <ReactionForm thoughtId={thought._id} />}
     </div>
   );
 };

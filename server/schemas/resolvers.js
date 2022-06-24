@@ -67,7 +67,7 @@ const resolvers = {
 
         await User.findByIdAndUpdate(
           { _id: context.user._id },
-          { $push: { thoughts: thought_id }},
+          { $push: { thoughts: thought._id }},
           { new: true }
         );
 
@@ -75,10 +75,10 @@ const resolvers = {
       }
       throw new AuthenticationError('you need to be logged in');
     },
-    addReaction: async (parent, { thoughtID, reactionBody }, context) => {
+    addReaction: async (parent, { thoughtId, reactionBody }, context) => {
       if (context.user) {
         const updatedThought = await Thought.findOneAndUpdate(
-          { _id: thoughtID },
+          { _id: thoughtId },
           { $push: { reactions: { reactionBody, username: context.user.username }}},
           { new: true, runValidators: true }
         );
