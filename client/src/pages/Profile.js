@@ -14,6 +14,7 @@ const Profile = (props) => {
   const { username: userParam } = useParams();
 
   const [addFriend] = useMutation(ADD_FRIEND);
+
   const { loading, data } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
     variables: { username: userParam}
   });
@@ -22,7 +23,7 @@ const Profile = (props) => {
 
   // navigate to personal profile page if username is the logged-in user's
   if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
-    return <Navigate to ='/profile:username' />;
+    return <Navigate to ='/profile' />;
   }
 
   if (loading) {
